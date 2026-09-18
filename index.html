@@ -1,0 +1,343 @@
+<title>Donia Hali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#F5F6F4;
+    --surface:#FFFFFF;
+    --ink:#141A18;
+    --ink-2:#55605C;
+    --rule:#DCE2DF;
+    --accent:#0B6E63;
+    --accent-soft:#E3EFEC;
+    --clay:#A2542C;
+    --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --body:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#0D1311;
+      --surface:#141B19;
+      --ink:#E9EEEC;
+      --ink-2:#97A5A0;
+      --rule:#243029;
+      --accent:#54C4B1;
+      --accent-soft:#12302B;
+      --clay:#D78F63;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0D1311;
+    --surface:#141B19;
+    --ink:#E9EEEC;
+    --ink-2:#97A5A0;
+    --rule:#243029;
+    --accent:#54C4B1;
+    --accent-soft:#12302B;
+    --clay:#D78F63;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:16.5px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding-inline:24px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  /* header */
+  .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+  .bar .wrap{display:flex;align-items:center;gap:18px;padding-block:12px}
+  .mark{font-family:var(--display);font-weight:700;letter-spacing:-0.01em;font-size:15px;margin-right:auto}
+  .bar nav{display:flex;gap:16px;font-size:13.5px;color:var(--ink-2)}
+  .bar nav a{text-decoration:none}
+  .bar nav a:hover{color:var(--accent)}
+  .lang{display:flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--surface)}
+  .lang button{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;padding:5px 9px;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+  @media(max-width:620px){.bar nav{display:none}}
+
+  /* hero */
+  header.hero{padding-block:60px 44px;border-bottom:1px solid var(--rule)}
+  .status{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+  h1{font-family:var(--display);font-weight:700;letter-spacing:-0.025em;line-height:1.04;font-size:clamp(2.4rem,7vw,3.5rem);margin:14px 0 0;text-wrap:balance}
+  .lede{font-size:clamp(1.05rem,2.4vw,1.25rem);color:var(--ink-2);max-width:60ch;margin:16px 0 0}
+  .lede strong{color:var(--ink);font-weight:600}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .btn{display:inline-block;text-decoration:none;font-size:14.5px;font-weight:600;padding:9px 16px;border-radius:6px;border:1px solid var(--rule);background:var(--surface)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  :root[data-theme="dark"] .btn.primary,
+  :root:not([data-theme="light"]) .btn.primary{color:#0D1311}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
+
+  /* figures strip */
+  .figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:34px}
+  .fig{background:var(--surface);padding:14px 14px 12px}
+  .fig b{display:block;font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;font-size:clamp(1.05rem,3vw,1.35rem);letter-spacing:-0.02em}
+  .fig span{display:block;font-size:12px;line-height:1.35;color:var(--ink-2);margin-top:4px}
+  @media(max-width:620px){.figures{grid-template-columns:repeat(2,1fr)}}
+
+  /* sections */
+  section{padding-block:52px;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+  h2{font-family:var(--display);font-weight:600;letter-spacing:-0.015em;font-size:1.6rem;margin:8px 0 0;text-wrap:balance}
+  .intro{max-width:62ch;color:var(--ink-2);margin:12px 0 0}
+
+  /* case studies */
+  .case{margin-top:34px;padding-top:26px;border-top:1px solid var(--rule)}
+  .case:first-of-type{border-top:0;padding-top:0}
+  .case-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+  .case h3{font-family:var(--display);font-weight:600;font-size:1.22rem;margin:0;letter-spacing:-0.01em}
+  .when{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-left:auto;white-space:nowrap}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent)}
+  .tag.wip{background:transparent;color:var(--clay);border:1px solid var(--clay)}
+  .grid{display:grid;grid-template-columns:120px 1fr;gap:6px 20px;margin-top:16px}
+  .grid dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-top:5px}
+  .grid dd{margin:0}
+  .grid dd.limit{color:var(--ink-2);font-style:italic}
+  @media(max-width:620px){.grid{grid-template-columns:1fr;gap:2px}.grid dt{padding-top:12px}}
+  .stack{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);line-height:1.8}
+  .repo{font-size:14px;margin-top:14px}
+  .repo a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+  .note{font-size:13.5px;color:var(--ink-2);margin-top:12px;padding-left:12px;border-left:2px solid var(--rule)}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:26px}
+  @media(max-width:620px){.skills{grid-template-columns:1fr}}
+  .skillset h4{font-family:var(--display);font-size:1rem;font-weight:600;margin:0 0 4px}
+  .skillset p{font-size:13px;color:var(--ink-2);margin:0 0 12px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:4px 9px;border:1px solid var(--rule);border-radius:5px;background:var(--surface)}
+  .chip.strong{border-color:var(--accent);color:var(--accent)}
+
+  /* timeline */
+  .path{margin-top:24px;display:grid;gap:0}
+  .step{display:grid;grid-template-columns:96px 1fr;gap:20px;padding-block:14px;border-top:1px solid var(--rule)}
+  .step:first-child{border-top:0}
+  .step .yr{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;padding-top:3px}
+  .step b{font-weight:600}
+  .step span{display:block;color:var(--ink-2);font-size:14.5px}
+  @media(max-width:620px){.step{grid-template-columns:1fr;gap:2px}}
+
+  /* contact */
+  .contact-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  footer{padding-block:30px 44px;font-size:13px;color:var(--ink-2)}
+  footer p{margin:0}
+  [lang-hidden]{display:none}
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="mark">Donia Hali</span>
+    <nav>
+      <a href="#work" data-fr="Projets" data-en="Work">Projets</a>
+      <a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
+      <a href="#path" data-fr="Parcours" data-en="Path">Parcours</a>
+      <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button id="btn-fr" type="button" aria-pressed="true">FR</button>
+      <button id="btn-en" type="button" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="status"><span class="dot"></span><span data-fr="Disponible — stage de fin d'études, janvier 2027" data-en="Available — final-year internship, January 2027">Disponible — stage de fin d'études, janvier 2027</span></p>
+    <h1 data-fr="Des données mesurées, pas supposées." data-en="Measured data, not assumed.">Des données mesurées, pas supposées.</h1>
+    <p class="lede" data-fr="Élève ingénieure en data science à ESPRIT (Tunis). Quatre stages en data, dont Orange Tunisie, où j'ai construit un pipeline d'indexation sur 377 660 enregistrements et un assistant RAG interrogeant 6 071 passages de documentation avec un modèle de langage exécuté en local." data-en="Data science engineering student at ESPRIT (Tunis). Four data internships, including Orange Tunisia, where I built an indexing pipeline over 377,660 records and a RAG assistant querying 6,071 documentation passages with a locally-run language model.">Élève ingénieure en data science à ESPRIT (Tunis). Quatre stages en data, dont Orange Tunisie, où j'ai construit un pipeline d'indexation sur 377 660 enregistrements et un assistant RAG interrogeant 6 071 passages de documentation avec un modèle de langage exécuté en local.</p>
+    <div class="actions">
+      <a class="btn primary" href="#work" data-fr="Voir les projets" data-en="See the work">Voir les projets</a>
+      <a class="btn" href="cv/CV_Donia_Hali.pdf" data-fr="Télécharger le CV" data-en="Download CV">Télécharger le CV</a>
+      <a class="btn" href="https://github.com/DoniaHali1">GitHub</a>
+      <a class="btn" href="https://linkedin.com/in/donia-hali">LinkedIn</a>
+    </div>
+    <div class="figures">
+      <div class="fig"><b>377 660</b><span data-fr="enregistrements indexés, Orange" data-en="records indexed, Orange">enregistrements indexés, Orange</span></div>
+      <div class="fig"><b>6 071</b><span data-fr="passages interrogés par l'assistant RAG" data-en="passages served by the RAG assistant">passages interrogés par l'assistant RAG</span></div>
+      <div class="fig"><b>1 152</b><span data-fr="points horaires sous détection d'anomalies" data-en="hourly points under anomaly detection">points horaires sous détection d'anomalies</span></div>
+      <div class="fig"><b>6</b><span data-fr="modèles de prévision comparés sur QoSBuddy" data-en="forecasting models benchmarked on QoSBuddy">modèles de prévision comparés sur QoSBuddy</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <p class="eyebrow" data-fr="Études de cas" data-en="Case studies">Études de cas</p>
+    <h2 data-fr="Quatre travaux, décrits par leur méthode et leurs limites" data-en="Four pieces of work, described by method and limits">Quatre travaux, décrits par leur méthode et leurs limites</h2>
+    <p class="intro" data-fr="Chaque étude suit la même trame : le problème, les données, la méthode, le résultat, et ce que le travail ne fait pas." data-en="Each study follows the same structure: problem, data, method, result, and what the work does not do.">Chaque étude suit la même trame : le problème, les données, la méthode, le résultat, et ce que le travail ne fait pas.</p>
+
+    <article class="case">
+      <div class="case-head">
+        <h3 data-fr="Assistant documentaire et détection d'anomalies" data-en="Documentation assistant and anomaly detection">Assistant documentaire et détection d'anomalies</h3>
+        <span class="tag" data-fr="Stage — Orange Tunisie" data-en="Internship — Orange Tunisia">Stage — Orange Tunisie</span>
+        <span class="when">2026</span>
+      </div>
+      <dl class="grid">
+        <dt data-fr="Problème" data-en="Problem">Problème</dt>
+        <dd data-fr="Les enregistrements de trafic étaient exploitables seulement par requête manuelle, et la documentation technique était dispersée entre plusieurs sources." data-en="Traffic records could only be queried by hand, and the technical documentation was scattered across several sources.">Les enregistrements de trafic étaient exploitables seulement par requête manuelle, et la documentation technique était dispersée entre plusieurs sources.</dd>
+        <dt data-fr="Données" data-en="Data">Données</dt>
+        <dd data-fr="377 660 enregistrements d'appels, structure de champs non documentée, reconstituée par rétro-ingénierie. Données nettoyées et anonymisées avant indexation." data-en="377,660 call records with an undocumented field layout, reverse-engineered. Data cleaned and anonymised before indexing.">377 660 enregistrements d'appels, structure de champs non documentée, reconstituée par rétro-ingénierie. Données nettoyées et anonymisées avant indexation.</dd>
+        <dt data-fr="Méthode" data-en="Method">Méthode</dt>
+        <dd data-fr="Pipeline d'ingestion et d'indexation Elasticsearch et Logstash. Détection d'anomalies horaire par statistiques robustes, médiane et écart absolu médian, sur 1 152 points, restituée dans Kibana. Assistant RAG sur 6 071 passages, avec un modèle de langage exécuté en local et non par API." data-en="Elasticsearch and Logstash ingestion and indexing pipeline. Hourly anomaly detection using robust statistics, median and median absolute deviation, over 1,152 points, surfaced in Kibana. RAG assistant over 6,071 passages, running a local language model rather than an API.">Pipeline d'ingestion et d'indexation Elasticsearch et Logstash. Détection d'anomalies horaire par statistiques robustes, médiane et écart absolu médian, sur 1 152 points, restituée dans Kibana. Assistant RAG sur 6 071 passages, avec un modèle de langage exécuté en local et non par API.</dd>
+        <dt data-fr="Résultat" data-en="Result">Résultat</dt>
+        <dd data-fr="Un jeu de données auparavant illisible devient interrogeable, et la documentation devient consultable en langage naturel sans qu'aucune donnée ne quitte l'infrastructure." data-en="A previously unreadable dataset became queryable, and the documentation became searchable in natural language without any data leaving the infrastructure.">Un jeu de données auparavant illisible devient interrogeable, et la documentation devient consultable en langage naturel sans qu'aucune donnée ne quitte l'infrastructure.</dd>
+        <dt data-fr="Limites" data-en="Limits">Limites</dt>
+        <dd class="limit" data-fr="Le seuil de détection est statistique et non appris ; il tient tant que le profil horaire reste stable. L'assistant n'a pas été évalué sur un jeu de questions de référence, ce que je ferais différemment aujourd'hui." data-en="The detection threshold is statistical rather than learned; it holds as long as the hourly profile stays stable. The assistant was not evaluated against a reference question set, which is what I would do differently today.">Le seuil de détection est statistique et non appris ; il tient tant que le profil horaire reste stable. L'assistant n'a pas été évalué sur un jeu de questions de référence, ce que je ferais différemment aujourd'hui.</dd>
+        <dt data-fr="Stack" data-en="Stack">Stack</dt>
+        <dd class="stack">Python · Elasticsearch · Logstash · Kibana · RAG · Ollama</dd>
+      </dl>
+      <p class="note" data-fr="Travail réalisé en entreprise sur des données de trafic réglementées. Ni le code ni les données ne sont publiables : cette page en décrit la méthode et les résultats, sans dépôt associé." data-en="Work carried out in-house on regulated traffic data. Neither the code nor the data can be published: this page describes the method and results, with no associated repository.">Travail réalisé en entreprise sur des données de trafic réglementées. Ni le code ni les données ne sont publiables : cette page en décrit la méthode et les résultats, sans dépôt associé.</p>
+    </article>
+
+    <article class="case">
+      <div class="case-head">
+        <h3>QoSBuddy</h3>
+        <span class="tag" data-fr="Projet académique, co-développé" data-en="Academic project, co-developed">Projet académique, co-développé</span>
+        <span class="when">2026</span>
+      </div>
+      <dl class="grid">
+        <dt data-fr="Problème" data-en="Problem">Problème</dt>
+        <dd data-fr="Anticiper la dégradation de la qualité de service d'un réseau au lieu de la constater après coup." data-en="Anticipating network quality-of-service degradation instead of observing it after the fact.">Anticiper la dégradation de la qualité de service d'un réseau au lieu de la constater après coup.</dd>
+        <dt data-fr="Méthode" data-en="Method">Méthode</dt>
+        <dd data-fr="Protocole d'évaluation posé avant la modélisation, puis comparaison de six modèles de prévision de séries temporelles : GRU, GRU-AE, TCNN, ARIMA, k-NN, XGBoost. Agents connectés à un modèle Mistral affiné par LoRA. Conteneurisation Docker Compose." data-en="Evaluation protocol defined before modelling, then a benchmark of six time-series forecasting models: GRU, GRU-AE, TCNN, ARIMA, k-NN, XGBoost. Agents wired to a Mistral model fine-tuned with LoRA. Docker Compose containerisation.">Protocole d'évaluation posé avant la modélisation, puis comparaison de six modèles de prévision de séries temporelles : GRU, GRU-AE, TCNN, ARIMA, k-NN, XGBoost. Agents connectés à un modèle Mistral affiné par LoRA. Conteneurisation Docker Compose.</dd>
+        <dt data-fr="Ma part" data-en="My part">Ma part</dt>
+        <dd data-fr="À préciser dépôt par dépôt dans le README, sans élargir : le projet est collectif." data-en="To be stated repository by repository in the README, without overstating: the project is collective.">À préciser dépôt par dépôt dans le README, sans élargir : le projet est collectif.</dd>
+        <dt data-fr="Limites" data-en="Limits">Limites</dt>
+        <dd class="limit" data-fr="L'affinage par LoRA a été mené sans étude d'ablation ; le gain attribuable au fine-tuning n'est donc pas démontré." data-en="LoRA fine-tuning was carried out without an ablation study, so the gain attributable to fine-tuning is not demonstrated.">L'affinage par LoRA a été mené sans étude d'ablation ; le gain attribuable au fine-tuning n'est donc pas démontré.</dd>
+        <dt data-fr="Stack" data-en="Stack">Stack</dt>
+        <dd class="stack">Python · TensorFlow · PyTorch · XGBoost · Mistral · LoRA · Docker Compose</dd>
+      </dl>
+      <p class="repo"><a href="https://github.com/DoniaHali1/QoSBuddy-project-" data-fr="Dépôt GitHub →" data-en="GitHub repository →">Dépôt GitHub →</a></p>
+    </article>
+
+    <article class="case">
+      <div class="case-head">
+        <h3 data-fr="Performance énergétique du réseau d'agences" data-en="Energy performance across a branch network">Performance énergétique du réseau d'agences</h3>
+        <span class="tag" data-fr="Stage — Banque de Tunisie" data-en="Internship — Banque de Tunisie">Stage — Banque de Tunisie</span>
+        <span class="when">2025</span>
+      </div>
+      <dl class="grid">
+        <dt data-fr="Problème" data-en="Problem">Problème</dt>
+        <dd data-fr="La direction déployait des installations photovoltaïques sans mesure comparative du gain réel, agence par agence." data-en="Management was deploying photovoltaic installations without a comparative measure of the real gain, branch by branch.">La direction déployait des installations photovoltaïques sans mesure comparative du gain réel, agence par agence.</dd>
+        <dt data-fr="Méthode" data-en="Method">Méthode</dt>
+        <dd data-fr="Nettoyage et modélisation des jeux de facturation et d'agences, indicateurs en DAX sur la consommation et le coût, tableau de bord comparant agences photovoltaïques et non photovoltaïques." data-en="Cleaning and modelling of billing and branch datasets, DAX indicators for consumption and cost, dashboard comparing photovoltaic and non-photovoltaic branches.">Nettoyage et modélisation des jeux de facturation et d'agences, indicateurs en DAX sur la consommation et le coût, tableau de bord comparant agences photovoltaïques et non photovoltaïques.</dd>
+        <dt data-fr="Résultat" data-en="Result">Résultat</dt>
+        <dd data-fr="Tableau de bord utilisé par la direction pour suivre le déploiement. Le livrable a été lu par des non-ingénieurs, comme dans mes quatre stages." data-en="Dashboard used by management to monitor the rollout. The deliverable was read by non-engineers, as in all four of my internships.">Tableau de bord utilisé par la direction pour suivre le déploiement. Le livrable a été lu par des non-ingénieurs, comme dans mes quatre stages.</dd>
+        <dt data-fr="Limites" data-en="Limits">Limites</dt>
+        <dd class="limit" data-fr="La comparaison ne corrige ni la surface ni la fréquentation des agences ; elle décrit un écart, elle ne l'explique pas." data-en="The comparison adjusts for neither floor area nor branch footfall; it describes a gap, it does not explain it.">La comparaison ne corrige ni la surface ni la fréquentation des agences ; elle décrit un écart, elle ne l'explique pas.</dd>
+        <dt data-fr="Stack" data-en="Stack">Stack</dt>
+        <dd class="stack">Power BI · DAX · SQL · Excel</dd>
+      </dl>
+    </article>
+
+    <article class="case">
+      <div class="case-head">
+        <h3>aml-copilot</h3>
+        <span class="tag wip" data-fr="En cours — MVP prévu fin septembre 2026" data-en="In progress — MVP due end of September 2026">En cours — MVP prévu fin septembre 2026</span>
+        <span class="when">2026</span>
+      </div>
+      <dl class="grid">
+        <dt data-fr="Problème" data-en="Problem">Problème</dt>
+        <dd data-fr="Face à une alerte de blanchiment, un analyste doit dire si la transaction est suspecte, pourquoi, et ce qu'en dit la réglementation. Trois outils séparés aujourd'hui." data-en="Facing a money-laundering alert, an analyst must say whether a transaction is suspicious, why, and what the regulation says. Three separate tools today.">Face à une alerte de blanchiment, un analyste doit dire si la transaction est suspecte, pourquoi, et ce qu'en dit la réglementation. Trois outils séparés aujourd'hui.</dd>
+        <dt data-fr="Données" data-en="Data">Données</dt>
+        <dd data-fr="Jeux publics uniquement : transactions synthétiques IBM pour la lutte anti-blanchiment, graphe Elliptic, et corpus réglementaire public GAFI, ABE, AMLR." data-en="Public datasets only: IBM synthetic anti-money-laundering transactions, the Elliptic graph, and a public regulatory corpus from FATF, EBA and the EU AMLR.">Jeux publics uniquement : transactions synthétiques IBM pour la lutte anti-blanchiment, graphe Elliptic, et corpus réglementaire public GAFI, ABE, AMLR.</dd>
+        <dt data-fr="Méthode" data-en="Method">Méthode</dt>
+        <dd data-fr="Scoring supervisé et explicabilité par SHAP, graphe de comptes interrogé en Cypher pour retrouver cycles et structures en étoile, RAG sur la réglementation, comparaison explicite entre RAG vectoriel et Graph RAG, agent arbitrant entre les quatre outils." data-en="Supervised scoring with SHAP explanations, an account graph queried in Cypher to surface cycles and fan-in structures, RAG over the regulation, an explicit comparison between vector RAG and Graph RAG, and an agent arbitrating between the four tools.">Scoring supervisé et explicabilité par SHAP, graphe de comptes interrogé en Cypher pour retrouver cycles et structures en étoile, RAG sur la réglementation, comparaison explicite entre RAG vectoriel et Graph RAG, agent arbitrant entre les quatre outils.</dd>
+        <dt data-fr="Stack" data-en="Stack">Stack</dt>
+        <dd class="stack">Python · XGBoost · SHAP · PyTorch Geometric · Neo4j · LangGraph · FastAPI · Docker</dd>
+      </dl>
+      <p class="note" data-fr="Projet personnel en construction. Le dépôt et la démonstration seront liés ici dès la mise en ligne du MVP." data-en="Personal project under construction. The repository and demo will be linked here as soon as the MVP ships.">Projet personnel en construction. Le dépôt et la démonstration seront liés ici dès la mise en ligne du MVP.</p>
+    </article>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <p class="eyebrow" data-fr="Compétences" data-en="Skills">Compétences</p>
+    <h2 data-fr="Séparées selon ce que j'ai réellement pratiqué" data-en="Split by what I have actually practised">Séparées selon ce que j'ai réellement pratiqué</h2>
+    <p class="intro" data-fr="Une compétence vue en cours et une compétence livrée en production ne se valent pas. La distinction est faite ici plutôt qu'en entretien." data-en="A tool seen in class and a tool shipped in production are not the same thing. The distinction is made here rather than in an interview.">Une compétence vue en cours et une compétence livrée en production ne se valent pas. La distinction est faite ici plutôt qu'en entretien.</p>
+    <div class="skills">
+      <div class="skillset">
+        <h4 data-fr="Pratiqué en entreprise" data-en="Practised in a company">Pratiqué en entreprise</h4>
+        <p data-fr="Sur données réelles, avec un livrable utilisé." data-en="On real data, with a deliverable that was used.">Sur données réelles, avec un livrable utilisé.</p>
+        <div class="chips">
+          <span class="chip strong">Python</span><span class="chip strong">SQL</span><span class="chip strong">PL/SQL</span>
+          <span class="chip strong">Elasticsearch</span><span class="chip strong">Logstash</span><span class="chip strong">Kibana</span>
+          <span class="chip strong">Power BI</span><span class="chip strong">DAX</span><span class="chip strong">Talend</span>
+          <span class="chip strong">pandas</span><span class="chip strong">scikit-learn</span><span class="chip strong">Git</span>
+          <span class="chip strong" data-fr="Qualité des données" data-en="Data quality">Qualité des données</span>
+        </div>
+      </div>
+      <div class="skillset">
+        <h4 data-fr="Pratiqué en projet" data-en="Practised on projects">Pratiqué en projet</h4>
+        <p data-fr="Académique ou personnel, hors contexte de production." data-en="Academic or personal, outside a production setting.">Académique ou personnel, hors contexte de production.</p>
+        <div class="chips">
+          <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">XGBoost</span>
+          <span class="chip">RAG</span><span class="chip">LLM</span><span class="chip">LoRA</span>
+          <span class="chip">Docker</span><span class="chip">FastAPI</span><span class="chip">Neo4j</span>
+          <span class="chip" data-fr="Séries temporelles" data-en="Time series">Séries temporelles</span>
+          <span class="chip" data-fr="Détection d'anomalies" data-en="Anomaly detection">Détection d'anomalies</span>
+        </div>
+      </div>
+    </div>
+    <p class="intro" style="margin-top:22px" data-fr="Langues : français C1, anglais C1, arabe langue maternelle." data-en="Languages: French C1, English C1, Arabic native.">Langues : français C1, anglais C1, arabe langue maternelle.</p>
+  </div>
+</section>
+
+<section id="path">
+  <div class="wrap">
+    <p class="eyebrow" data-fr="Parcours" data-en="Path">Parcours</p>
+    <h2 data-fr="De la business intelligence vers l'ingénierie des systèmes d'IA" data-en="From business intelligence toward AI systems engineering">De la business intelligence vers l'ingénierie des systèmes d'IA</h2>
+    <div class="path">
+      <div class="step"><span class="yr">2021 – 2024</span><span><b data-fr="Licence en Business Intelligence" data-en="Bachelor's in Business Intelligence">Licence en Business Intelligence</b><span data-fr="Faculté des sciences économiques et de gestion de Nabeul. Deux stages data analyst en parallèle." data-en="Faculty of Economics and Management, Nabeul. Two data analyst internships alongside.">Faculté des sciences économiques et de gestion de Nabeul. Deux stages data analyst en parallèle.</span></span></div>
+      <div class="step"><span class="yr">2024 – 2027</span><span><b data-fr="Diplôme d'ingénieur en data science, ESPRIT" data-en="Engineering degree in data science, ESPRIT">Diplôme d'ingénieur en data science, ESPRIT</b><span data-fr="Cursus labellisé EUR-ACE par la Commission des titres d'ingénieur." data-en="Programme carrying the EUR-ACE label awarded by the French Commission des Titres d'Ingénieur.">Cursus labellisé EUR-ACE par la Commission des titres d'ingénieur.</span></span></div>
+      <div class="step"><span class="yr">2026</span><span><b data-fr="Data scientist, Orange Tunisie" data-en="Data scientist, Orange Tunisia">Data scientist, Orange Tunisie</b><span data-fr="Premier travail d'IA générative sur données d'entreprise, avec un modèle exécuté en local." data-en="First generative-AI work on company data, with a locally-run model.">Premier travail d'IA générative sur données d'entreprise, avec un modèle exécuté en local.</span></span></div>
+      <div class="step"><span class="yr">2027</span><span><b data-fr="Stage de fin d'études, 6 mois, à partir de janvier" data-en="Final-year internship, 6 months, from January">Stage de fin d'études, 6 mois, à partir de janvier</b><span data-fr="Recherché en IA appliquée, data science ou data engineering." data-en="Sought in applied AI, data science or data engineering.">Recherché en IA appliquée, data science ou data engineering.</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2 data-fr="Ouverte aux échanges sur un stage de fin d'études" data-en="Open to conversations about a final-year internship">Ouverte aux échanges sur un stage de fin d'études</h2>
+    <p class="intro" data-fr="Stage de six mois à partir de janvier 2027, en France ou en Europe. Le stage se déroule dans le cadre d'une convention tripartite établie par ESPRIT ; je reste disponible pour en préciser les modalités et le calendrier." data-en="Six-month internship from January 2027, in France or Europe. The internship runs under a tripartite agreement issued by ESPRIT; I am available to clarify the terms and timeline.">Stage de six mois à partir de janvier 2027, en France ou en Europe. Le stage se déroule dans le cadre d'une convention tripartite établie par ESPRIT ; je reste disponible pour en préciser les modalités et le calendrier.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:doniahali123@gmail.com">doniahali123@gmail.com</a>
+      <a class="btn" href="https://linkedin.com/in/donia-hali">LinkedIn</a>
+      <a class="btn" href="https://github.com/DoniaHali1">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p data-fr="Donia Hali — Tunis. Page construite à la main, hébergée sur GitHub Pages." data-en="Donia Hali — Tunis. Hand-built page, hosted on GitHub Pages.">Donia Hali — Tunis. Page construite à la main, hébergée sur GitHub Pages.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var fr=document.getElementById('btn-fr'), en=document.getElementById('btn-en');
+  var nodes=Array.prototype.slice.call(document.querySelectorAll('[data-fr][data-en]'));
+  function set(lang){
+    nodes.forEach(function(n){ n.textContent = n.getAttribute('data-'+lang); });
+    fr.setAttribute('aria-pressed', lang==='fr');
+    en.setAttribute('aria-pressed', lang==='en');
+    document.documentElement.setAttribute('lang', lang);
+    try{ localStorage.setItem('dh-lang', lang); }catch(e){}
+  }
+  fr.addEventListener('click', function(){ set('fr'); });
+  en.addEventListener('click', function(){ set('en'); });
+  var saved=null;
+  try{ saved=localStorage.getItem('dh-lang'); }catch(e){}
+  if(saved==='en'){ set('en'); } else { document.documentElement.setAttribute('lang','fr'); }
+})();
+</script>
