@@ -23,21 +23,21 @@
 
 <header class="hero">
   <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
-  <div id="cursor-glow" aria-hidden="true"></div>
+  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="hero-grid">
-      <div class="portrait"><img src="photo.jpg" alt="Donia Hali" width="520" height="650"></div>
-      <div>
-        <p class="status"><span class="dot"></span><span data-fr="Disponible à partir de janvier 2027" data-en="Available from January 2027">Disponible à partir de janvier 2027</span></p>
-        <h1 data-fr="Bonjour, je suis <span class='grad'>Donia Hali</span>." data-en="Hi, I'm <span class='grad'>Donia Hali</span>.">Bonjour, je suis <span class="grad">Donia Hali</span>.</h1>
-        <p class="does"><span data-fr="Data science" data-en="Data science">Data science</span><span data-fr="Machine learning" data-en="Machine learning">Machine learning</span><span data-fr="IA appliquée" data-en="Applied AI">IA appliquée</span><span data-fr="Analyse de données" data-en="Data analysis">Analyse de données</span></p>
-        <p class="lede" data-fr="Élève ingénieure en data science à ESPRIT. Je cherche un stage de fin d'études de six mois à partir de janvier 2027, en France ou en Europe." data-en="Data science engineering student at ESPRIT. I am looking for a six-month final-year internship starting January 2027, in France or Europe.">Élève ingénieure en data science à ESPRIT. Je cherche un stage de fin d'études de six mois à partir de janvier 2027, en France ou en Europe.</p>
-        <div class="actions">
-          <a class="btn primary" href="CV_Donia_Hali.pdf" data-fr="Télécharger mon CV" data-en="Download my resume">Télécharger mon CV</a>
-          <a class="btn" href="https://github.com/DoniaHali1">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/donia-hali-499ab1221/">LinkedIn</a>
-        </div>
-      </div>
+    <div class="portrait"><img src="photo.jpg" alt="Donia Hali" width="520" height="650"></div>
+    <h1 data-fr="Bonjour, je suis <span class='grad'>Donia Hali</span>." data-en="Hi, I'm <span class='grad'>Donia Hali</span>.">Bonjour, je suis <span class="grad">Donia Hali</span>.</h1>
+    <p class="does"><span data-fr="Data science" data-en="Data science">Data science</span><span data-fr="Machine learning" data-en="Machine learning">Machine learning</span><span data-fr="IA appliquée" data-en="Applied AI">IA appliquée</span><span data-fr="Analyse de données" data-en="Data analysis">Analyse de données</span></p>
+    <p class="lede" data-fr="Élève ingénieure en data science à ESPRIT. Je construis des pipelines de données, des modèles et des applications d'IA générative, et je les rends lisibles par ceux qui décident." data-en="Data science engineering student at ESPRIT. I build data pipelines, models and generative AI applications, and make them legible to the people who decide.">Élève ingénieure en data science à ESPRIT. Je construis des pipelines de données, des modèles et des applications d'IA générative, et je les rends lisibles par ceux qui décident.</p>
+    <p class="meta">
+      <span data-fr="Disponible janvier 2027" data-en="Available January 2027">Disponible janvier 2027</span>
+      <span data-fr="Stage de fin d'études, 6 mois" data-en="Final-year internship, 6 months">Stage de fin d'études, 6 mois</span>
+      <span data-fr="France et Europe" data-en="France and Europe">France et Europe</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="CV_Donia_Hali.pdf" data-fr="Télécharger mon CV" data-en="Download my resume">Télécharger mon CV</a>
+      <a class="btn" href="https://github.com/DoniaHali1">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/donia-hali-499ab1221/">LinkedIn</a>
     </div>
   </div>
 </header>
@@ -273,17 +273,102 @@ document.querySelectorAll('.stack').forEach(function(el){
   Object.keys(map).forEach(function(id){ io.observe(document.getElementById(id)); });
 })();
 
-/* halo qui suit la souris dans le hero */
+/* constellation : points reliés, dans le hero */
 (function(){
-  var hero = document.querySelector('.hero'), glow = document.getElementById('cursor-glow');
-  if (!hero || !glow || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(hover: hover)').matches) return;
-  hero.addEventListener('pointermove', function(e){
+  var canvas = document.getElementById('net');
+  var hero = document.querySelector('.hero');
+  if (!canvas || !hero || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var colors = ['#8B5CF6', '#22D3EE', '#34D399', '#F8FAFC'];
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0, pts = [], raf = null, link = 0;
+  var mouse = { x: -999, y: -999 };
+
+  function build(){
     var r = hero.getBoundingClientRect();
-    glow.style.left = (e.clientX - r.left) + 'px';
-    glow.style.top  = (e.clientY - r.top) + 'px';
-    glow.style.opacity = 1;
+    W = Math.round(r.width); H = Math.round(r.height);
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    link = Math.min(168, Math.max(96, W * 0.15));
+    var n = Math.round(Math.min(86, Math.max(26, (W * H) / 15000)));
+    pts = [];
+    for (var i = 0; i < n; i++){
+      pts.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.17, vy: (Math.random() - 0.5) * 0.17,
+        r: Math.random() * 1.5 + 0.7,
+        c: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 0.7;
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      for (var j = i + 1; j < pts.length; j++){
+        var q = pts[j], dx = p.x - q.x, dy = p.y - q.y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < link){
+          ctx.globalAlpha = (1 - d / link) * 0.20;
+          ctx.strokeStyle = p.c;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+        }
+      }
+      var mx = p.x - mouse.x, my = p.y - mouse.y;
+      var dm = Math.sqrt(mx * mx + my * my);
+      if (dm < link * 1.25){
+        ctx.globalAlpha = (1 - dm / (link * 1.25)) * 0.42;
+        ctx.strokeStyle = '#22D3EE';
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+    for (var k = 0; k < pts.length; k++){
+      var s = pts[k];
+      ctx.shadowBlur = 9; ctx.shadowColor = s.c; ctx.fillStyle = s.c;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.2832); ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  }
+
+  function step(){
+    for (var i = 0; i < pts.length; i++){
+      var p = pts[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+    }
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+
+  build(); draw();
+  if (!reduce) raf = requestAnimationFrame(step);
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ build(); draw(); }, 180);
   });
-  hero.addEventListener('pointerleave', function(){ glow.style.opacity = 0; });
+
+  if (window.matchMedia('(hover: hover)').matches){
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    });
+    hero.addEventListener('pointerleave', function(){ mouse.x = -999; mouse.y = -999; });
+  }
+
+  if ('IntersectionObserver' in window && !reduce){
+    new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting){ if (!raf) raf = requestAnimationFrame(step); }
+      else if (raf){ cancelAnimationFrame(raf); raf = null; }
+    }).observe(hero);
+  }
 })();
+
 </script>
