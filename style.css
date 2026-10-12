@@ -20,6 +20,7 @@
   --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
 
   --c:var(--violet);
+  --accent-name:#A78BFA;
 }
 
 *{box-sizing:border-box}
@@ -117,19 +118,13 @@ h1{
   font-family:var(--display);font-weight:700;letter-spacing:-.035em;line-height:1.04;
   font-size:clamp(2.2rem,6vw,3.7rem);margin:30px 0 0;text-wrap:balance;
 }
-h1 .grad{
-  background:linear-gradient(100deg,var(--violet) 8%,var(--cyan) 52%,var(--green) 96%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
+h1 .grad{color:var(--accent-name)}
 .does{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px 0 0;padding:0}
 .does span{
   font-family:var(--mono);font-size:12px;padding:6px 13px;border-radius:999px;white-space:nowrap;
   border:1px solid var(--line-2);background:rgba(255,255,255,.025);transition:.3s;
 }
-.does span:nth-child(1){color:var(--violet);border-color:rgba(139,92,246,.4)}
-.does span:nth-child(2){color:var(--cyan);border-color:rgba(34,211,238,.4)}
-.does span:nth-child(3){color:var(--green);border-color:rgba(52,211,153,.4)}
-.does span:nth-child(4){color:#C4B5FD;border-color:rgba(196,181,253,.4)}
+.does span{color:var(--accent-name);border-color:rgba(167,139,250,.38);background:rgba(139,92,246,.08)}
 .does span:hover{transform:translateY(-3px);background:rgba(255,255,255,.06)}
 
 .lede{font-size:1.06rem;color:var(--muted);max-width:56ch;margin:22px auto 0}
