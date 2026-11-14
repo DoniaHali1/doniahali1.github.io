@@ -123,28 +123,6 @@ Détail et liste des erreurs dans `eval/resultats.md`.
 Le routeur se trompe rarement mais s'abstient souvent : c'est voulu, une abstention renvoie
 vers les mots-clés, une erreur afficherait une réponse hors de propos.
 
-## Limites
 
-- Les exemples d'entraînement et le jeu de test ont été écrits par la même personne. Les
-  vraies questions de recruteurs seront plus variées : les chiffres sont optimistes.
-- TF-IDF ne comprend pas les synonymes (« université » et « école »). C'est la raison de
-  l'étape 3, les embeddings.
-- L'assistante ne rédige pas encore de réponse : elle choisit parmi des réponses vérifiées.
-  La rédaction par un agent est l'étape 4.
 
-## Modifier le contenu
 
-| Je veux changer... | Fichier |
-|---|---|
-| un texte d'une section | `js/data.js` |
-| une réponse de l'assistante, un bouton | `js/answers.js` |
-| une couleur, une police | `css/style.css`, bloc `:root` en haut |
-| les questions d'exemple du routeur | `backend/data/intents.json` |
-| un fait sur moi | la fiche concernée dans `knowledge/` |
-
-## Règles de vérité
-
-- Un projet d'équipe est présenté comme un projet d'équipe.
-- Les compétences sont séparées en trois niveaux : entreprise, projet, formation.
-- Diplôme prévu en septembre 2027 : pas diplômée avant.
-- Stage Orange : ni code ni données publiés.
