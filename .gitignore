@@ -1,0 +1,14 @@
+# Secrets : ne jamais envoyer sur GitHub
+.env
+.dev.vars
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Éditeur et système
+.vscode/
+.DS_Store
+Thumbs.db

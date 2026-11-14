@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donia Hali | Data science</title>
+  <meta name="description" content="Portfolio de Donia Hali, élève ingénieure en data science. Posez vos questions à son assistante.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <!-- Barre du haut -->
+  <header class="topbar">
+    <a class="brand" href="#top">Donia Hali</a>
+    <nav class="nav" id="nav"></nav>
+    <div class="topbar-actions">
+      <button class="lang" id="lang-toggle" type="button" aria-label="Changer de langue">EN</button>
+      <a class="btn btn-primary" id="cv-top" href="assets/CV_Donia_Hali.pdf" download>CV</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- 1. Accueil : l'assistante -->
+    <section class="hero">
+      <img class="hero-avatar" src="assets/avatar.png" alt="Avatar illustré de Donia Hali" width="240" height="400">
+      <div class="hero-body">
+        <h1 id="hero-title"></h1>
+        <div class="hero-tags" id="hero-tags"></div>
+        <p class="hero-facts" id="hero-facts"></p>
+
+        <div class="assistant" id="assistant">
+          <div class="assistant-head">
+            <img src="assets/avatar-face.png" alt="" width="36" height="36">
+            <span class="assistant-name" id="assistant-name"></span>
+            <span class="assistant-status"><span class="dot"></span><span id="assistant-status"></span></span>
+          </div>
+          <div class="thread" id="thread" aria-live="polite"></div>
+          <div class="chips" id="chips"></div>
+          <form class="ask" id="ask" autocomplete="off">
+            <input id="ask-input" type="text" maxlength="200" aria-label="Votre question">
+            <button class="btn btn-primary" type="submit" id="ask-send"></button>
+          </form>
+          <p class="assistant-note" id="assistant-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Sections classiques : remplies par js/app.js à partir de js/data.js -->
+    <section class="section" id="experience"></section>
+    <section class="section" id="projets"></section>
+    <section class="section" id="competences"></section>
+    <section class="section" id="parcours"></section>
+    <section class="section" id="contact"></section>
+
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+
+  <!-- Ordre important : le contenu, puis les réponses, puis la logique -->
+  <script src="js/data.js?v=2"></script>
+  <script src="js/answers.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>
